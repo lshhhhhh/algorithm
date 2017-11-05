@@ -1,0 +1,16 @@
+int sum=0;
+dfn[i]=low[i]=++time;
+for(int j=head[i];j!=0;j=p[j].nex)
+{
+    int to=p[j].to;
+    if(!dfn[to])
+    {
+        fa[to]=fa[i];
+        work(to);
+        low[i]=min(low[i],low[to]);
+        if(low[to]>=dfn[i] && fa[i]!=i)flag[i]=1;
+        if(fa[i]==i)sum++;
+    }
+    else low[i]=min(low[i],dfn[to]);
+}
+if(fa[i]==i && sum>=2)flag[i]=1;
