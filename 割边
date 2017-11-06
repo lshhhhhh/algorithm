@@ -1,0 +1,26 @@
+void work(int i)
+{
+	time++,dfn[i]=low[i]=time;
+	for(int j=head[i];j!=0;j=q[j].nex)
+	{
+		int to=q[j].to;
+		if(!dfn[to])
+		{
+			fa[to]=q[j].num;
+			work(to);
+			low[i]=min(low[i],low[to]);
+		}
+		else
+		{
+			if(fa[i]!=q[j].num)low[i]=min(low[i],dfn[to]);
+		}
+	}
+	if(fa[i] && low[i]==dfn[i] && flag[fa[i]]==0)
+	{
+		flag[fa[i]]=1;
+	}
+}
+bool cmp(const at &a1,const at &a2){
+	return (a1.x<a2.x || (a1.x==a2.x && a1.y<a2.y));
+}
+
